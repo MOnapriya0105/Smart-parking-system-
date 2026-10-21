@@ -1,0 +1,88 @@
+<h1>Admin Dashboard</h1>
+<p>Available Slots: {{ available }}</p>
+<p>Booked Slots: {{ booked }}</p>
+<p>Total Revenue: ₹{{ revenue }}</p>
+<a href="/">Back</a>
+[16/10, 7:42 am] Suki💙: admin.html
+[16/10, 7:42 am] Suki💙: <!DOCTYPE html>
+<html>
+<head>
+<title>Exit Vehicle</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="exit-wrapper">
+
+    <div class="exit-box">
+        <h1>🚘 Exit Vehicle</h1>
+        <p class="subtitle">Enter your details to check fine</p>
+
+        <form method="POST">
+
+            <div class="field">
+                <label>Vehicle Number</label> <br>
+                <input type="text" name="vehicle" required>
+                
+            </div>
+
+            <div class="field">
+                 <label>Token Number</label> <br>
+                <input type="text" name="token" required>
+               
+            </div>
+
+            <button type="submit" class="btn-exit">
+                Check Fine
+            </button>
+
+        </form>
+
+        <a href="/" class="back">← Back to Parking</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+[16/10, 7:42 am] Suki💙: exit.html
+[16/10, 7:42 am] Suki💙: <!DOCTYPE html>
+<html>
+<head>
+<title>Smart Parking</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Smart Parking System using Loyalty pricing 🚗</h1>
+<h3>Available Slots: {{ available }}</h3>
+
+<div class="input-box">
+<input id="vehicle" placeholder="Vehicle Number">
+<input id="phone" placeholder="Phone Number">
+<input id="hours" type="number" placeholder="Expected Hours">
+</div>
+
+<div class="grid">
+{% for slot in slots %}
+<div class="slot {% if slot[1]==0 %}free{% else %}booked{% endif %}"
+onclick="bookSlot('{{ slot[0] }}', this)">
+{{ slot[0] }}
+</div>
+{% endfor %}
+</div>
+
+<br>
+<a href="/exit">Exit Vehicle</a>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
